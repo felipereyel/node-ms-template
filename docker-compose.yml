@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  server:
+    command: /bin/sh -c "npm i && npm run dev"
+    container_name: microservice
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ./tsconfig.json:/app/tsconfig.json
+    env_file:
+      - .env
